@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://2068kr1pb87o"]
+
+[ext_resource type="Script" uid="uid://cmk6yu08xys45" path="res://scripts/scene scripts/on_intro.gd" id="1_vuduy"]
+[ext_resource type="VideoStream" uid="uid://binnn04e6r1ts" path="res://assets/pre-rendered video/youtube_Spongebob Boo-womp Sound Effect.ogv" id="2_3438a"]
+[ext_resource type="Script" uid="uid://d35smvwf1hdrs" path="res://scripts/scene scripts/intro_cutscene.gd" id="2_juow0"]
+[ext_resource type="AudioStream" uid="uid://ceercmdyl5n1f" path="res://assets/pre-rendered video/ytmp3free.cc_spongebob-boowomp-sound-effect-youtubemp3free.org.mp3" id="4_wifpd"]
+
+[node name="IntroCutscene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vuduy")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+stream = ExtResource("2_3438a")
+autoplay = true
+script = ExtResource("2_juow0")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_wifpd")
+autoplay = true

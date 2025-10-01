@@ -3,9 +3,8 @@ extends CharacterBody2D
 @export var speed = 300.0
 @export var jump_vel = -400.0
 @export var dash = 2000
-var health = null
 
-var first = true
+var health = null
 var health_bar = null
 
 var cooldown = false
@@ -20,14 +19,14 @@ var current_scene = null
 
 func _ready():
 	health_bar = get_parent().get_node("PhantomCamera2D/PlrUI/Health")
-	if first == true:
-		health = _load_from_file("res://data/health.txt")
+	health = _load_from_file("res://data/health.txt")
+	current_scene = get_tree().current_scene.scene_file_path
+	
 	if health == "":
 		health = 100
 		_save_to_file(str(health), "res://data/health.txt")
 		
 	health = int(health)
-	current_scene = get_tree().current_scene.scene_file_path
 	
 func _save_to_file(content,file_dir):
 	var file = FileAccess.open(file_dir, FileAccess.WRITE)

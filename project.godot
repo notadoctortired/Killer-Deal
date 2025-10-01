@@ -11,13 +11,20 @@ config_version=5
 [application]
 
 config/name="Killer Deal"
-run/main_scene="uid://d4gru3sl7x555"
+config/description="A run n' gun deal with Death! (Jamsepticeye 2025)"
+run/main_scene="uid://2068kr1pb87o"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/resizable=false
 
 [editor_plugins]
 
