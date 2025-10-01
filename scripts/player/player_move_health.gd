@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var speed = 300.0
 @export var jump_vel = -400.0
 @export var dash = 2000
-@export var health = null
+var health = null
 
 var first = true
 var health_bar = null
@@ -16,6 +16,8 @@ var dashing_timer = 0.1
 var dashing_cooldown = false
 var dashing_cooldown_timer = 1	
 
+var current_scene = null
+
 func _ready():
 	health_bar = get_parent().get_node("PhantomCamera2D/PlrUI/Health")
 	if first == true:
@@ -23,6 +25,9 @@ func _ready():
 	if health == "":
 		health = 100
 		_save_to_file(str(health), "res://data/health.txt")
+		
+	health = int(health)
+	current_scene = get_tree().current_scene.scene_file_path
 	
 func _save_to_file(content,file_dir):
 	var file = FileAccess.open(file_dir, FileAccess.WRITE)
@@ -39,7 +44,9 @@ func _process(delta):
 		_save_to_file(str(health), "res://data/health.txt")
 		print("updated")
 	elif float(health) <= 0:
-		get_tree().quit()
+		health = ""
+		_save_to_file(str(health), "res://data/health.txt")
+		get_tree().change_scene_to_file(current_scene)
 
 func _physics_process(delta):
 	if not is_on_floor():

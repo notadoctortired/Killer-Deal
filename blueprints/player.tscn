@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bs2j1oxn612yv"]
+
+[ext_resource type="Script" uid="uid://dx8v342vuq45k" path="res://scripts/player/player_move_health.gd" id="1_lyt4r"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_lyt4r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5h0ey"]
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(450, 182)
+script = ExtResource("1_lyt4r")
+dash = 1000
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+scale = Vector2(20, 20)
+mesh = SubResource("QuadMesh_lyt4r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5h0ey")
