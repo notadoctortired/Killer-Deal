@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d4gru3sl7x555"]
+[gd_scene load_steps=18 format=3 uid="uid://d4gru3sl7x555"]
 
 [ext_resource type="Texture2D" uid="uid://b6mx7a5pempsc" path="res://assets/Parallax/sky.png" id="1_dw7u0"]
 [ext_resource type="PackedScene" uid="uid://bs2j1oxn612yv" path="res://blueprints/player.tscn" id="1_tmr53"]
@@ -22,6 +22,18 @@ ease = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y646j"]
 bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_dw7u0"]
+font_size = 25
+font_color = Color(0.176923, 0.601676, 0, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fyxdr"]
+font_size = 25
+font_color = Color(1, 0, 0, 1)
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fyxdr"]
 
@@ -96,10 +108,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 203.0
-offset_top = 93.0
-offset_right = -202.0
-offset_bottom = -140.0
+offset_left = 184.0
+offset_top = 57.0
+offset_right = -186.0
+offset_bottom = -175.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_gbhdq")
@@ -107,13 +119,35 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_y646j")
 show_percentage = false
 script = ExtResource("5_7gix3")
 
+[node name="Lives" type="Label" parent="PhantomCamera2D/PlrUI"]
+layout_mode = 0
+offset_left = 191.0
+offset_top = 61.0
+offset_right = 215.0
+offset_bottom = 96.0
+text = "0"
+label_settings = SubResource("LabelSettings_dw7u0")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Kills" type="Label" parent="PhantomCamera2D/PlrUI"]
+layout_mode = 0
+offset_left = 236.0
+offset_top = 61.0
+offset_right = 260.0
+offset_bottom = 96.0
+text = "0"
+label_settings = SubResource("LabelSettings_fyxdr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="EnemyMobile" parent="." instance=ExtResource("10_4asn1")]
-position = Vector2(468, 536)
+position = Vector2(465, 534)
 wandering_dist = 2000
 
 [node name="Platform" parent="." instance=ExtResource("5_4asn1")]
-position = Vector2(706, 752)
-scale = Vector2(125.28, 24.24)
+position = Vector2(1163, 752)
+scale = Vector2(188.16, 24.24)
 
 [node name="BorderWall" parent="." instance=ExtResource("5_4asn1")]
 position = Vector2(-24, 752)
@@ -124,3 +158,8 @@ script = ExtResource("11_dw7u0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BorderWall/Area2D"]
 shape = SubResource("RectangleShape2D_fyxdr")
+
+[node name="EnemyMobile2" parent="." instance=ExtResource("10_4asn1")]
+position = Vector2(1267, 535)
+wandering_dist = 4000
+speed = 150

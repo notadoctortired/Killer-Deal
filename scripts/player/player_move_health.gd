@@ -6,6 +6,8 @@ extends CharacterBody2D
 
 var health = null
 var health_bar = null
+var lives = null
+var kills = null
 
 var cooldown = false
 var no_wallclimb = false
@@ -20,6 +22,20 @@ var dashing_cooldown_timer = 1
 var current_scene = null
 
 func _ready():
+	lives = _load_from_file("res://data/lives.txt")
+	kills = _load_from_file("res://data/kills.txt")
+	
+	if lives == "":
+		lives = 2
+		kills = 0
+	elif lives == "0":
+		get_tree().quit()
+	else:
+		lives = int(lives)
+		kills = int(kills)
+	get_parent().get_node("PhantomCamera2D/PlrUI/Lives").text = str(lives)
+	get_parent().get_node("PhantomCamera2D/PlrUI/Kills").text = str(kills)
+	
 	health_bar = get_parent().get_node("PhantomCamera2D/PlrUI/Health")
 	health = _load_from_file("res://data/health.txt")
 	current_scene = get_tree().current_scene.scene_file_path
@@ -46,7 +62,11 @@ func _process(delta):
 		print("updated")
 	elif float(health) <= 0:
 		health = ""
+		lives -= 1
 		_save_to_file(str(health), "res://data/health.txt")
+		_save_to_file(str(lives), "res://data/lives.txt")
+		_save_to_file(str(kills), "res://data/kills.txt")
+		
 		get_tree().change_scene_to_file(current_scene)
 
 func _physics_process(delta):

@@ -20,6 +20,16 @@ func _physics_process(delta):
 	$EnemyUI/Health.value = health
 	
 	if health <= 0:
+		get_parent().get_node("Player").kills += 1
+		get_parent().get_node("Player").lives += 1
+		
+		var kills = get_parent().get_node("Player").kills
+		var lives = get_parent().get_node("Player").lives
+		
+		get_parent().get_node("PhantomCamera2D/PlrUI/Lives").text = str(lives)
+		get_parent().get_node("PhantomCamera2D/PlrUI/Kills").text = str(kills)
+		
+		
 		queue_free()
 
 func _despawn():
