@@ -12,7 +12,7 @@ func _physics_process(delta):
 	position.x += direction * speed * delta
 	
 	var current_time = Time.get_ticks_msec()
-	if (current_time - last_turn > wandering_dist):
+	if current_time - last_turn > wandering_dist:
 		last_turn = current_time
 		direction *= -1
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d4gru3sl7x555"]
+[gd_scene load_steps=16 format=3 uid="uid://d4gru3sl7x555"]
 
 [ext_resource type="Texture2D" uid="uid://b6mx7a5pempsc" path="res://assets/sky.png" id="1_ahbqi"]
 [ext_resource type="PackedScene" uid="uid://bs2j1oxn612yv" path="res://blueprints/player.tscn" id="1_tmr53"]
@@ -7,12 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://q4jfbluwqejt" path="res://assets/towers.png" id="3_7gix3"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="3_88ety"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_ahbqi"]
+[ext_resource type="PackedScene" uid="uid://b3hhednimgxva" path="res://scenes/platform.tscn" id="5_4asn1"]
 [ext_resource type="Script" uid="uid://bkfugx671ms1o" path="res://scripts/ui/health.gd" id="5_7gix3"]
 [ext_resource type="PackedScene" uid="uid://dbxgditnratj" path="res://scenes/enemy_mobile.tscn" id="10_4asn1"]
-
-[sub_resource type="QuadMesh" id="QuadMesh_1c2mv"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f7g2b"]
+[ext_resource type="Script" uid="uid://c4temrp4t3l8w" path="res://scripts/player/no_climb.gd" id="11_dw7u0"]
 
 [sub_resource type="Resource" id="Resource_y646j"]
 script = ExtResource("4_ahbqi")
@@ -24,6 +22,8 @@ ease = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y646j"]
 bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fyxdr"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -49,6 +49,7 @@ texture = ExtResource("2_7gix3")
 
 [node name="Towers" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.3, 0.3)
+scroll_offset = Vector2(0, 60)
 repeat_size = Vector2(1280, 0)
 repeat_times = 2
 
@@ -59,17 +60,6 @@ texture = ExtResource("3_7gix3")
 
 [node name="Player" parent="." instance=ExtResource("1_tmr53")]
 position = Vector2(632, 550)
-
-[node name="Ground" type="StaticBody2D" parent="."]
-position = Vector2(1102, 900)
-scale = Vector2(972.476, -33.8086)
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Ground"]
-scale = Vector2(20, 20)
-mesh = SubResource("QuadMesh_1c2mv")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
-shape = SubResource("RectangleShape2D_f7g2b")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
@@ -120,3 +110,18 @@ script = ExtResource("5_7gix3")
 [node name="EnemyMobile" parent="." instance=ExtResource("10_4asn1")]
 position = Vector2(610, 525)
 wandering_dist = 2000
+
+[node name="Platform" parent="." instance=ExtResource("5_4asn1")]
+position = Vector2(632, 752)
+scale = Vector2(41, 24.24)
+
+[node name="BorderWall" parent="." instance=ExtResource("5_4asn1")]
+position = Vector2(-24, 752)
+scale = Vector2(41, 96.28)
+
+[node name="Area2D" type="Area2D" parent="BorderWall"]
+script = ExtResource("11_dw7u0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BorderWall/Area2D"]
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_fyxdr")

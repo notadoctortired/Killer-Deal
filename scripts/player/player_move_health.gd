@@ -8,6 +8,7 @@ var health = null
 var health_bar = null
 
 var cooldown = false
+var no_wallclimb = false
 var cooldown_timer = 0.5
 
 var dashing = false
@@ -58,7 +59,7 @@ func _physics_process(delta):
 		cooldown = true
 	
 	if cooldown:
-		if not is_on_wall() or is_on_floor():
+		if not is_on_wall() or is_on_floor() and no_wallclimb == false:
 			cooldown = false
 			
 	if dashing:
