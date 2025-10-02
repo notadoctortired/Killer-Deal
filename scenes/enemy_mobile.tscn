@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://dbxgditnratj"]
+
+[ext_resource type="Script" uid="uid://b6k5mpwpu7mcj" path="res://scripts/ai/mobile_enemy.gd" id="1_rhkdr"]
+[ext_resource type="Script" uid="uid://6ndl5bo7pwew" path="res://scripts/damage/on_hit.gd" id="2_i4chr"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_5oyso"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rhkdr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i4chr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o705m"]
+
+[node name="EnemyMobile" type="RigidBody2D"]
+script = ExtResource("1_rhkdr")
+speed = 100
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+scale = Vector2(20, 20)
+mesh = SubResource("QuadMesh_5oyso")
+texture = SubResource("PlaceholderTexture2D_rhkdr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_i4chr")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="DamageArea" type="Area2D" parent="."]
+scale = Vector2(1.1, 1.1)
+script = ExtResource("2_i4chr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+shape = SubResource("RectangleShape2D_o705m")
+
+[node name="Timer" type="Timer" parent="DamageArea"]

@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="3_88ety"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_ahbqi"]
 [ext_resource type="Script" uid="uid://bkfugx671ms1o" path="res://scripts/ui/health.gd" id="5_7gix3"]
-[ext_resource type="Script" uid="uid://6ndl5bo7pwew" path="res://scripts/damage/on_hit.gd" id="6_qcd3b"]
+[ext_resource type="PackedScene" uid="uid://dbxgditnratj" path="res://scenes/enemy_mobile.tscn" id="10_4asn1"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_1c2mv"]
 
@@ -117,22 +117,6 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_y646j")
 show_percentage = false
 script = ExtResource("5_7gix3")
 
-[node name="HarmfulObject" type="StaticBody2D" parent="."]
-position = Vector2(989, 531)
-scale = Vector2(3, 3)
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="HarmfulObject"]
-scale = Vector2(20, 20)
-mesh = SubResource("QuadMesh_1c2mv")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HarmfulObject"]
-shape = SubResource("RectangleShape2D_f7g2b")
-
-[node name="DamageArea" type="Area2D" parent="HarmfulObject"]
-scale = Vector2(1.1, 1.1)
-script = ExtResource("6_qcd3b")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HarmfulObject/DamageArea"]
-shape = SubResource("RectangleShape2D_f7g2b")
-
-[node name="Timer" type="Timer" parent="HarmfulObject/DamageArea"]
+[node name="EnemyMobile" parent="." instance=ExtResource("10_4asn1")]
+position = Vector2(610, 525)
+wandering_dist = 2000
