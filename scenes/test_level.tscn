@@ -1,7 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://d4gru3sl7x555"]
+[gd_scene load_steps=15 format=3 uid="uid://d4gru3sl7x555"]
 
+[ext_resource type="Texture2D" uid="uid://b6mx7a5pempsc" path="res://assets/sky.png" id="1_ahbqi"]
 [ext_resource type="PackedScene" uid="uid://bs2j1oxn612yv" path="res://blueprints/player.tscn" id="1_tmr53"]
+[ext_resource type="Texture2D" uid="uid://d3fpes45kdoph" path="res://assets/clouds.png" id="2_7gix3"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_qcd3b"]
+[ext_resource type="Texture2D" uid="uid://q4jfbluwqejt" path="res://assets/towers.png" id="3_7gix3"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="3_88ety"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_ahbqi"]
 [ext_resource type="Script" uid="uid://bkfugx671ms1o" path="res://scripts/ui/health.gd" id="5_7gix3"]
@@ -24,12 +27,42 @@ bg_color = Color(1, 0, 0, 1)
 
 [node name="Node2D" type="Node2D"]
 
+[node name="Sky" type="Parallax2D" parent="."]
+repeat_size = Vector2(1280, 720)
+repeat_times = 2
+
+[node name="Sky_TextureRect" type="TextureRect" parent="Sky"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_ahbqi")
+
+[node name="Clouds" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.1, 0.1)
+repeat_size = Vector2(1280, 0)
+autoscroll = Vector2(40, 0)
+repeat_times = 2
+
+[node name="Clouds_TextureRect" type="TextureRect" parent="Clouds"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_7gix3")
+
+[node name="Towers" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.3, 0.3)
+repeat_size = Vector2(1280, 0)
+repeat_times = 2
+
+[node name="Towers_TextureRect" type="TextureRect" parent="Towers"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_7gix3")
+
 [node name="Player" parent="." instance=ExtResource("1_tmr53")]
-position = Vector2(113, 591)
+position = Vector2(632, 550)
 
 [node name="Ground" type="StaticBody2D" parent="."]
-position = Vector2(572, 630)
-scale = Vector2(62.3708, -2.75707)
+position = Vector2(1102, 900)
+scale = Vector2(972.476, -33.8086)
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Ground"]
 scale = Vector2(20, 20)
@@ -40,7 +73,7 @@ shape = SubResource("RectangleShape2D_f7g2b")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
-position = Vector2(113, 591)
+position = Vector2(632, 550)
 process_callback = 0
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -51,7 +84,7 @@ metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
 [node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(113, 591)
+position = Vector2(632, 550)
 script = ExtResource("3_88ety")
 follow_mode = 2
 follow_target = NodePath("../Player")
@@ -85,7 +118,7 @@ show_percentage = false
 script = ExtResource("5_7gix3")
 
 [node name="HarmfulObject" type="StaticBody2D" parent="."]
-position = Vector2(703, 572)
+position = Vector2(989, 531)
 scale = Vector2(3, 3)
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="HarmfulObject"]
