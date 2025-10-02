@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://dbxgditnratj"]
+[gd_scene load_steps=9 format=3 uid="uid://dbxgditnratj"]
 
-[ext_resource type="Script" uid="uid://b6k5mpwpu7mcj" path="res://scripts/ai/mobile_enemy.gd" id="1_rhkdr"]
+[ext_resource type="Script" uid="uid://b6k5mpwpu7mcj" path="res://scripts/ai/enemy_AI.gd" id="1_rhkdr"]
 [ext_resource type="Script" uid="uid://6ndl5bo7pwew" path="res://scripts/damage/on_hit.gd" id="2_i4chr"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_5oyso"]
@@ -12,9 +12,16 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o705m"]
 size = Vector2(25.4545, 25.4545)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i4chr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o705m"]
+bg_color = Color(1, 0, 0, 1)
+
 [node name="EnemyMobile" type="RigidBody2D"]
+process_priority = 1
 script = ExtResource("1_rhkdr")
 speed = 100
+metadata/identifier = "enemy"
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 scale = Vector2(20, 20)
@@ -24,8 +31,6 @@ texture = SubResource("PlaceholderTexture2D_rhkdr")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_i4chr")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-
 [node name="DamageArea" type="Area2D" parent="."]
 scale = Vector2(1.1, 1.1)
 script = ExtResource("2_i4chr")
@@ -34,3 +39,27 @@ script = ExtResource("2_i4chr")
 shape = SubResource("RectangleShape2D_o705m")
 
 [node name="Timer" type="Timer" parent="DamageArea"]
+
+[node name="EnemyUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -225.0
+offset_top = -118.0
+offset_right = 225.0
+offset_bottom = 119.0
+
+[node name="Health" type="ProgressBar" parent="EnemyUI"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 203.0
+offset_top = 93.0
+offset_right = -202.0
+offset_bottom = -140.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_i4chr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_o705m")
+show_percentage = false

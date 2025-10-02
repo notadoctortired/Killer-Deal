@@ -10,6 +10,7 @@ var health_bar = null
 var cooldown = false
 var no_wallclimb = false
 var cooldown_timer = 0.5
+var anim_direction = "right"
 
 var dashing = false
 var dashing_timer = 0.1
@@ -59,8 +60,9 @@ func _physics_process(delta):
 		cooldown = true
 	
 	if cooldown:
-		if not is_on_wall() or is_on_floor() and no_wallclimb == false:
-			cooldown = false
+		if not is_on_wall() or is_on_floor():
+			if no_wallclimb == false:
+				cooldown = false
 			
 	if dashing:
 		dashing_timer -= delta
@@ -85,9 +87,29 @@ func _physics_process(delta):
 		velocity.x = -dash
 		dashing = true
 		dashing_cooldown = true
+		anim_direction = "left"
+		$AnimatedSprite2D.play("dash")
 	elif Input.is_action_just_pressed("dash_right") and not dashing_cooldown:
 		velocity.x = dash
 		dashing = true
 		dashing_cooldown = true
+		anim_direction = "right"
+		$AnimatedSprite2D.play("dash")
+		
+	if direction < 0 and dashing_cooldown == false:
+		$AnimatedSprite2D.play("walk_left")
+		anim_direction = "left"
+		$Knife.position.x = -44
+	elif direction > 0 and dashing_cooldown == false:
+		$AnimatedSprite2D.play("walk_right")
+		$Knife.position.x = 44
+		anim_direction = "right"
+		
+	if velocity.x == 0 and anim_direction == "left":
+		$AnimatedSprite2D.play("idle_left")
+	elif velocity.x == 0 and anim_direction == "right":
+		$AnimatedSprite2D.play("idle_right")
+		
+	
 
 	move_and_slide()

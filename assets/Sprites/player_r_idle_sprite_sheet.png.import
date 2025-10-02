@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://q4jfbluwqejt"
-path="res://.godot/imported/towers.png-6bea79cf49a0b9c4fd5fcf7ce0a7d699.ctex"
+uid="uid://cx5ad25jh6a1k"
+path="res://.godot/imported/player_r_idle_sprite_sheet.png-e33750d2591a58d460e01f2a4b52bc21.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/towers.png"
-dest_files=["res://.godot/imported/towers.png-6bea79cf49a0b9c4fd5fcf7ce0a7d699.ctex"]
+source_file="res://assets/Sprites/player_r_idle_sprite_sheet.png"
+dest_files=["res://.godot/imported/player_r_idle_sprite_sheet.png-e33750d2591a58d460e01f2a4b52bc21.ctex"]
 
 [params]
 
