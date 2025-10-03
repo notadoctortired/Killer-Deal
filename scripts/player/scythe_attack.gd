@@ -2,6 +2,7 @@ extends Area2D
 
 var cooldown = false
 var hit = false
+var global_body
 
 func _ready():
 	body_entered.connect(_attack)
@@ -12,14 +13,16 @@ func _process(delta):
 		visible = true
 		monitorable = true
 		monitoring = true
-		$Timer.start(1)
+		$Timer.start(0.3)
 		$AnimatedSprite2D.play("swing")
 		cooldown = true
 		
 func _attack(body):
 	if body.process_priority == 1 and hit == false:
-		body.health -= 10
+		body.health -= 40
 		hit = true
+		global_body = body
+		
 
 func _hide_weapon():
 	visible = false

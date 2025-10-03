@@ -9,7 +9,7 @@ func _ready():
 	
 func _body_entered(body):
 	if body.name == "Player":
-		body.health -= 10
+		body.health -= 25
 		$Timer.start(0.5)
 		body_global = body
 	
@@ -18,5 +18,5 @@ func _body_left(body):
 		$Timer.stop()
 		
 func _timeout():
-	body_global.health -= 10
+	body_global.health -= 25
 	$Timer.start(0.5)

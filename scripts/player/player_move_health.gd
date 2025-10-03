@@ -22,7 +22,7 @@ var dashing_cooldown_timer = 1
 var current_scene = null
 
 func _ready():
-	lives = _load_from_file("res://data/lives.txt")
+	lives = _load_from_file("res://data/lives.txt") 
 	kills = _load_from_file("res://data/kills.txt")
 	
 	if lives == "":
@@ -118,11 +118,14 @@ func _physics_process(delta):
 		
 	if direction < 0 and dashing_cooldown == false:
 		$AnimatedSprite2D.play("walk_left")
+		$Scythe.position.x = -44
+		
 		anim_direction = "left"
-		$Knife.position.x = -44
+		
 	elif direction > 0 and dashing_cooldown == false:
 		$AnimatedSprite2D.play("walk_right")
-		$Knife.position.x = 44
+		$Scythe.position.x = 44
+		
 		anim_direction = "right"
 		
 	if velocity.x == 0 and anim_direction == "left":
